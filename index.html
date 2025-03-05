@@ -1,1 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raph - Portfolio</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 4rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Previous styles remain, adding new styles */
+        .navbar {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 0 1rem 1rem 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transition: width 0.3s;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .skill-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+
+        .split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .split-container {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
+                bottom: 0;
+                top: auto;
+                left: 0;
+                right: 0;
+                transform: none;
+                border-radius: 1rem 1rem 0 0;
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg"></canvas>
+    
+    <div class="content">
+        <section id="about">
+            <h1>Hi, I'm Raph</h1>
+            <p>Currently looking for a job in IT. "A good developer is one that doesn't count time spent on projects".</p>
+        </section>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-item" onclick="scrollToSection('about')">About</div>
+        <div class="nav-item" onclick="scrollToSection('skills')">Skills</div>
+        <div class="nav-item" onclick="scrollToSection('projects')">Projects</div>
+        <div class="nav-item" onclick="scrollToSection('experience')">Experience</div>
+        <div class="nav-item">
+            <a href="https://raphaelmos.github.io/Resume/" target="_blank" style="color: inherit; text-decoration: none;">
+                Contact
+            </a>
+        </div>
+    </nav>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-badge">JavaScript</div>
+            <div class="skill-badge">Python</div>
+            <div class="skill-badge">C</div>
+            <div class="skill-badge">Kotlin</div>
+            <div class="skill-badge">C++</div>
+            <div class="skill-badge">PHP</div>
+            <div class="skill-badge">React</div>
+            <div class="skill-badge">Node.js</div>
+            <div class="skill-badge">SQL</div>
+            <div class="skill-badge">Git</div>
+            <div class="skill-badge">Three.js</div>
+            <div class="skill-badge">Android</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Latest Projects</h2>
+        <div class="projects-grid">
+            <a href="https://github.com/Raphaelmos/MusicPlayerApp" target="_blank" class="project-card">
+                <img src="Screenshot6.png" alt="Music Player App" />
+                <div class="project-info">
+                    <h3>MusicPlayerApp</h3>
+                    <p>Android music player for .mp3 and .wav files</p>
+                </div>
+            </a>
+            <a href="https://github.com/Raphaelmos/SpaceJump" target="_blank" class="project-card">
+                <img src="Screenshot14.png" alt="Space Jump" />
+                <div class="project-info">
+                    <h3>SpaceJump</h3>
+                    <p>Space-themed platformer game in Godot</p>
+                </div>
+            </a>
+            <a href="https://github.com/Raphaelmos/Kmeansonimage" target="_blank" class="project-card">
+                <img src="Screenshot10.png" alt="Kmeans on Image" />
+                <div class="project-info">
+                    <h3>Kmeansonimage</h3>
+                    <p>K-Means clustering on images using OpenGL</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+
+
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('#bg'),
+            antialias: true
+        });
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.setZ(30);
+
+        // Enhanced particle system
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 11000;
+        const posArray = new Float32Array(particlesCount * 3);
+        const colors = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i += 3) {
+            posArray[i] = (Math.random() - 0.5) * 100;
+            posArray[i + 1] = (Math.random() - 0.5) * 100;
+            posArray[i + 2] = (Math.random() - 0.5) * 100;
+
+            // Create gradient colors
+            colors[i] = Math.random() * 0.3 + 0.7; // R
+            colors[i + 1] = Math.random() * 0.3 + 0.7; // G
+            colors[i + 2] = Math.random() * 0.3 + 0.7; // B
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // geometric shapes
+        const addFloatingShape = (geometry, color, position) => {
+            const material = new THREE.MeshPhysicalMaterial({
+                color: color,
+                metalness: 0.5,
+                roughness: 0.5,
+                transmission: 0.6,
+                thickness: 0.5
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(...position);
+            scene.add(mesh);
+            return mesh;
+        };
+
+        // complex shapes
+        const shapes = [
+            addFloatingShape(
+                new THREE.TorusKnotGeometry(2, 0.5, 100, 16),
+                0xff6b6b,
+                [10, 5, -5]
+            ),
+            addFloatingShape(
+                new THREE.IcosahedronGeometry(2),
+                0x4ecdc4,
+                [-10, -5, -5]
+            ),
+            addFloatingShape(
+                new THREE.DodecahedronGeometry(2),
+                0xffd93d,
+                [0, 10, -10]
+            )
+        ];
+
+        // animation function
+        function animate() {
+            requestAnimationFrame(animate);
+
+            shapes.forEach((shape, i) => {
+                shape.rotation.x += 0.001 * (i + 1);
+                shape.rotation.y += 0.002 * (i + 1);
+                shape.position.y += Math.sin(Date.now() * 0.001 + i) * 0.02;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        // Start animation
+        animate();
+    </script>
+</body>
+</html>
